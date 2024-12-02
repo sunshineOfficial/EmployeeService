@@ -7,11 +7,30 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Dapper" Version="2.1.35" />
+        <PackageReference Include="dbup-postgresql" Version="5.0.40" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.11" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.11" />
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers\" />
+      <EmbeddedResource Update="Repositories\Scripts\User\User.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>User.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <None Remove="Migrations\0001_Create_users.sql" />
+      <EmbeddedResource Include="Migrations\0001_Create_users.sql" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Repositories\Scripts\User\User.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>User.resx</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>
